@@ -24,6 +24,15 @@
                     <div th:if="${error}" class="alert alert-danger mt-3">
                         <p>Error: <span th:text="${error}"></span></p>
                     </div>
+                    <div class="forecast">
+        				<h3>5-Day Forecast</h3>
+        				<div th:each="forecast : ${forecastList}">
+            				<p><strong th:text="${forecast.dt_txt}"></strong></p>
+            				<p>Temperature: <span th:text="${forecast.main.temp}"></span>°C</p>
+            				<p>Description: <span th:text="${forecast.weather[0].description}"></span></p>
+            				<hr>
+        				</div>
+    				</div>
                 </div>
             </div>
         </div>
