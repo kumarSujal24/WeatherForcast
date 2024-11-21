@@ -1,32 +1,68 @@
 @charset "ISO-8859-1";
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/image.png') no-repeat center center fixed;
+    background: url('/images/image.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
     font-family: 'Arial', sans-serif;
 }
+
 .container {
     margin-top: 100px;
 }
 .card {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.7); /* Adjusted opacity */
+    border-radius: 15px; /* Slightly more rounded corners */
+    padding: 20px; /* Added padding for spacing */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Deeper shadow */
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 .weather-icon {
-    font-size: 100px;
+    font-size: 4rem; /* Alternate way to control size */
     color: #ffd700;
-    padding-bottom: 10px;
+    margin-bottom: 20px; /* Added spacing below the icon */
 }
+
 .card-text {
     font-size: 1.2em;
     transition: color 0.3s;
 }
 .card-text:hover {
     color: #ffd700;
+}
+.forecast h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.forecast p {
+    margin: 5px 0;
+    font-size: 1em; /* Slightly larger text */
+}
+
+hr {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-secondary {
+    background-color: #555;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #777;
+}
+
+.temperature-row {
+    display: flex; /* Align children side by side */
+    justify-content: space-between; /* Add space between Min and Max Temp */
+    gap: 10px; /* Optional: Add spacing between the items */
+}
+
+.temperature-row p {
+    margin: 0; /* Remove default paragraph margin for a cleaner look */
+    font-size: 1em; /* Adjust font size if necessary */
 }

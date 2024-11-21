@@ -25,7 +25,6 @@ public class WeatherControllerTest {
 
     @BeforeEach
     public void setup() {
-        // Initialize mocks and sample data before each test.
         weatherService = mock(WeatherService.class);
         model = mock(Model.class);
         weatherController = new WeatherController(weatherService);
@@ -33,7 +32,7 @@ public class WeatherControllerTest {
 
     @Test
     public void testGetWeatherSuccess() {
-        // 1. Mock weather data
+        // Mock weather data
         WeatherResponse weatherResponse = new WeatherResponse();
         weatherResponse.setName("SampleCity");
         WeatherResponse.Sys sys = new WeatherResponse.Sys();
@@ -56,11 +55,11 @@ public class WeatherControllerTest {
 
         when(weatherService.getWeatherData("SampleCity")).thenReturn(weatherResponse);
 
-        // 2. Mock forecast data
+        // Mock forecast data
         ForecastResponse forecastResponse = new ForecastResponse();
         ForecastResponse.Forecast forecast = new ForecastResponse.Forecast();
         ForecastResponse.Main forecastMain = new ForecastResponse.Main();
-        forecastMain.setTemp(22.0);
+        forecastMain.setTemp_max(22.0);  // Use temp_max or temp_min instead of temp
 
         ForecastResponse.Weather forecastWeather = new ForecastResponse.Weather();
         forecastWeather.setDescription("clear sky");
@@ -72,10 +71,10 @@ public class WeatherControllerTest {
 
         when(weatherService.getFilteredForecastData("SampleCity")).thenReturn(forecastResponse);
 
-        // 3. Call the controller method
+        // Call the controller method
         String viewName = weatherController.getWeather("SampleCity", model);
 
-        // 4. Verify model attributes (simplified example)
+        // Verify model attributes
         verify(model).addAttribute("city", "SampleCity");
         verify(model).addAttribute("country", "SampleCountry");
         verify(model).addAttribute("temperature", 20.5);
@@ -84,11 +83,10 @@ public class WeatherControllerTest {
         verify(model).addAttribute("weatherIcon", "wi wi-owm-500");
         verify(model).addAttribute("forecastList", forecastResponse.getList().subList(0, 5));
 
-        // 5. Check view name
+        // Check view name
         assertEquals("weather", viewName);
     }
-    
-   
+
     @Test
     public void testGetWeather_CityNotFound() {
         when(weatherService.getWeatherData("NonExistentCity")).thenReturn(null);
@@ -115,7 +113,6 @@ public class WeatherControllerTest {
         assertEquals("weather", viewName);
     }
 
-
     @Test
     public void testGetWeather_ExceptionHandling() {
         // Configure the service to throw an exception when called
@@ -127,5 +124,4 @@ public class WeatherControllerTest {
         verify(model).addAttribute("error", "Unable to fetch weather data. Please try again later.");
         assertEquals("weather", viewName);
     }
-
 }

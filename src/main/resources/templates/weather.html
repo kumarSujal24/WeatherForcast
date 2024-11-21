@@ -11,28 +11,46 @@
 <body>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-body text-center">
-                    <h1 class="card-title">Weather in <span th:text="${city}">City</span>, <span th:text="${country}">Country</span></h1>
-                    <span th:classappend="${weatherIcon} + ' weather-icon'"></span>
-                    <p class="card-text"><strong>Description:</strong> <span th:text="${weatherDescription}">Description</span></p>
-                    <p class="card-text"><strong>Temperature:</strong> <span th:text="${temperature}">Temperature</span>°C</p>
-                    <p class="card-text"><strong>Humidity:</strong> <span th:text="${humidity}">Humidity</span>%</p>
-                    <p class="card-text"><strong>Wind Speed:</strong> <span th:text="${windspeed}">Wind Speed</span> m/s</p>
-                    <a href="/" class="btn btn-secondary btn-block">Back</a>
-                    <div th:if="${error}" class="alert alert-danger mt-3">
-                        <p>Error: <span th:text="${error}"></span></p>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Side: Current Weather -->
+                        <div class="col-md-6 text-center">
+                            <h1 class="card-title">Weather in <span th:text="${city}">City</span>, <span th:text="${country}">Country</span></h1>
+                            <i th:classappend="${weatherIcon} + ' weather-icon'"></i>
+                            <p class="card-text"><strong>Description:</strong> <span th:text="${weatherDescription}">Description</span></p>
+                            <p class="card-text"><strong>Temperature:</strong> <span th:text="${temperature}">Temperature</span>°C</p>
+                            <p class="card-text"><strong>Humidity:</strong> <span th:text="${humidity}">Humidity</span>%</p>
+                            <p class="card-text"><strong>Wind Speed:</strong> <span th:text="${windspeed}">Wind Speed</span> m/s</p>
+                            <form action="/weather" method="get">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="city" placeholder="Enter city name" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+                            </form>
+                            <div th:if="${error}" class="alert alert-danger mt-3">
+                                <p>Error: <span th:text="${error}"></span></p>
+                            </div>
+                        </div>
+                        <!-- Right Side: Forecast -->
+                        <div class="col-md-6">  
+    						<h3>5-Day Forecast</h3>
+    						<div class="forecast">
+        						<div th:each="forecast : ${forecastList}">
+            						<p><strong th:text="${forecast.dt_txt}">Date</strong></p>
+            						<p>
+                					Temperature: 
+                					<span th:text="${forecast.main.temp_max} + '°C / ' + ${forecast.main.temp_min} + '°C'">
+                    				Max Temp / Min Temp
+                					</span>
+           							</p>
+            						<p>Description: <span th:text="${forecast.weather[0].description}">Description</span></p>
+            						<hr>
+        						</div>
+    						</div>
+						</div>
                     </div>
-                    <div class="forecast">
-        				<h3>5-Day Forecast</h3>
-        				<div th:each="forecast : ${forecastList}">
-            				<p><strong th:text="${forecast.dt_txt}"></strong></p>
-            				<p>Temperature: <span th:text="${forecast.main.temp}"></span>°C</p>
-            				<p>Description: <span th:text="${forecast.weather[0].description}"></span></p>
-            				<hr>
-        				</div>
-    				</div>
                 </div>
             </div>
         </div>

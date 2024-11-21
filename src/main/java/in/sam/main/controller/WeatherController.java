@@ -1,7 +1,7 @@
 package in.sam.main.controller;
 
 import in.sam.main.model.WeatherResponse;
-import in.sam.main.model.ForecastResponse; // Import the forecast response model
+import in.sam.main.model.ForecastResponse;
 import in.sam.main.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
