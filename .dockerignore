@@ -1,0 +1,14 @@
+# Ignore target directory except the JAR file
+target/*
+!target/weatherApplication1-1.0.jar
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore build tools and metadata
+.mvn/
+.idea/
